@@ -18,7 +18,11 @@ jobs:
         run: |
           pyinstaller start.py --onefile --noconsole
       - name: Upload
-        uses: actions/upload-artifact@v2
+        # 上传到release
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: exe
-          path: dist/start.exe
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/start.exe
+          tag: 'latest'
+          overwrite: true
+          file_glob: true
